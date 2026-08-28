@@ -123,31 +123,65 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
+  // Robust Click & Touch Handler with Debounce
+  let lastOpenTime = 0;
+  function handleOpenAction(btn, e) {
+    const now = Date.now();
+    if (now - lastOpenTime < 300) return;
+    lastOpenTime = now;
+
+    if (e && e.cancelable) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    const projectId = btn.getAttribute('data-project-id');
+    if (projectId && projectDetails[projectId]) {
+      openProjectModal(projectId);
+    } else {
+      const projName = btn.getAttribute('data-project') || 'Project';
+      showToast(`⚡ Viewing: ${projName}`);
+    }
+  }
+
+  let lastCloseTime = 0;
+  function handleCloseAction(e) {
+    const now = Date.now();
+    if (now - lastCloseTime < 300) return;
+    lastCloseTime = now;
+
+    if (e && e.cancelable) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    closeProjectModal();
+  }
+
   // Attach demo/overview button listeners
   const demoButtons = document.querySelectorAll('.demo-btn');
   demoButtons.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const projectId = btn.getAttribute('data-project-id');
-      if (projectId && projectDetails[projectId]) {
-        openProjectModal(projectId);
-      } else {
-        const projName = btn.getAttribute('data-project') || 'Project';
-        showToast(`⚡ Viewing: ${projName}`);
-      }
-    });
+    btn.addEventListener('click', (e) => handleOpenAction(btn, e));
+    btn.addEventListener('touchend', (e) => handleOpenAction(btn, e), { passive: false });
   });
 
-  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeProjectModal);
-  if (modalSecondaryCloseBtn) modalSecondaryCloseBtn.addEventListener('click', closeProjectModal);
+  // Modal close buttons
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', handleCloseAction);
+    modalCloseBtn.addEventListener('touchend', handleCloseAction, { passive: false });
+  }
+  if (modalSecondaryCloseBtn) {
+    modalSecondaryCloseBtn.addEventListener('click', handleCloseAction);
+    modalSecondaryCloseBtn.addEventListener('touchend', handleCloseAction, { passive: false });
+  }
 
-  // Close when clicking outside dialog
+  // Close when clicking or tapping outside dialog backdrop
   if (modal) {
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        closeProjectModal();
-      }
+      if (e.target === modal) handleCloseAction(e);
     });
+    modal.addEventListener('touchend', (e) => {
+      if (e.target === modal) handleCloseAction(e);
+    }, { passive: false });
   }
 
   // Close with Escape key
@@ -155,6 +189,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
       closeProjectModal();
     }
+  });
+
+  // Global delegation fallback for dynamic tap safety
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.demo-btn');
+    if (btn) handleOpenAction(btn, e);
   });
 
   // 3. One-Click Copy Email to Clipboard
