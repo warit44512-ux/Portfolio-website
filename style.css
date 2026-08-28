@@ -259,6 +259,9 @@ body {
   box-shadow: var(--shadow-md);
   border-radius: 4px;
   cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
@@ -296,6 +299,9 @@ body {
   box-shadow: var(--shadow-sm);
   border-radius: 4px;
   cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
@@ -354,6 +360,9 @@ body {
 }
 
 .project-nb-card {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
   background: var(--bg-card);
   border: 2px solid var(--border-cyan);
   box-shadow: var(--shadow-md);
@@ -454,6 +463,9 @@ body {
 }
 
 .project-actions {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
   display: flex;
   gap: 10px;
   margin-top: auto;
@@ -654,6 +666,211 @@ body {
 }
 
 /* ==========================================================================
+   Interactive Project Detail Modal
+   ========================================================================== */
+.modal,
+.modal-overlay,
+.nb-modal-backdrop {
+  display: none;
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.modal.active,
+.modal-overlay.active,
+.nb-modal-backdrop.active {
+  display: flex !important;
+  pointer-events: auto !important;
+  z-index: 9999 !important;
+  opacity: 1;
+}
+
+.nb-modal-dialog {
+  position: relative;
+  z-index: 10000;
+  pointer-events: auto;
+  background: var(--bg-card);
+  border: 2px solid var(--border-cyan);
+  box-shadow: 8px 8px 0px var(--shadow-black);
+  border-radius: 4px;
+  width: 100%;
+  max-width: 680px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(20px) scale(0.98);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal.active .nb-modal-dialog,
+.modal-overlay.active .nb-modal-dialog,
+.nb-modal-backdrop.active .nb-modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--accent-primary);
+  color: var(--text-dark);
+  padding: 10px 18px;
+  border-bottom: 2px solid var(--border-cyan);
+  font-family: var(--font-mono);
+}
+
+.modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-category-tag {
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.modal-year-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: #1e293b;
+  color: #38bdf8;
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--text-dark);
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  font-weight: 900;
+  padding: 0 4px;
+  transition: transform 0.1s ease;
+}
+
+.modal-close-btn:hover {
+  transform: scale(1.2);
+}
+
+.modal-body-content {
+  padding: 24px 22px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.modal-title {
+  font-size: 1.38rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.modal-tagline {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.modal-section-box {
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-box-title {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--accent-primary);
+}
+
+.arch-flow-diagram {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.arch-node {
+  background: var(--bg-card-elevated);
+  border: 1.5px solid var(--border-cyan);
+  color: #ffffff;
+  padding: 5px 11px;
+  border-radius: 4px;
+  font-weight: 700;
+  box-shadow: 2px 2px 0px var(--shadow-black);
+}
+
+.arch-arrow {
+  color: var(--accent-primary);
+  font-weight: 900;
+  font-size: 0.95rem;
+}
+
+.modal-highlights-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-highlights-list li {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  padding-left: 18px;
+  position: relative;
+}
+
+.modal-highlights-list li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: var(--accent-primary);
+  font-size: 0.75rem;
+}
+
+.modal-actions-footer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  padding-top: 6px;
+  border-top: 1.5px solid var(--border-subtle);
+}
+
+/* ==========================================================================
    Responsive Media Queries
    ========================================================================== */
 @media (max-width: 860px) {
@@ -701,16 +918,21 @@ body {
 @media (max-width: 768px) {
   /* Header: Left-aligned logo, right-aligned single-line nav links, hidden status badge */
   .nb-header {
+    position: relative;
+    z-index: 1000;
+    pointer-events: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     padding: 10px 14px;
   }
 
   .brand-chip {
     flex-shrink: 0;
+    pointer-events: auto;
+    touch-action: manipulation;
   }
 
   .nb-nav {
@@ -718,16 +940,23 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 4px;
     margin-left: auto;
     flex-wrap: nowrap;
     white-space: nowrap;
+    pointer-events: auto;
   }
 
+  .nb-header nav a,
   .nb-nav-link {
+    display: inline-block;
+    padding: 8px 10px;
     font-size: 0.76rem;
     letter-spacing: 0.02em;
     white-space: nowrap;
+    pointer-events: auto;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .header-status-badge {
@@ -787,6 +1016,35 @@ body {
     flex-wrap: wrap;
     gap: 8px;
     justify-content: flex-start;
+  }
+
+  /* Modal Mobile Adjustments */
+  .modal,
+  .modal-overlay,
+  .nb-modal-backdrop {
+    padding: 12px;
+  }
+
+  .nb-modal-dialog {
+    max-height: 92vh;
+  }
+
+  .modal-body-content {
+    padding: 18px 16px;
+    gap: 14px;
+  }
+
+  .modal-title {
+    font-size: 1.18rem;
+  }
+
+  .modal-actions-footer {
+    flex-direction: column;
+  }
+
+  .modal-actions-footer .nb-btn-sm {
+    width: 100%;
+    justify-content: center;
   }
 }
 

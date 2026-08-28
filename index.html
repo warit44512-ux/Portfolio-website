@@ -85,7 +85,7 @@
 
         <div class="projects-grid">
           <!-- Project 1: LINE Receipt & Expense Tracker Bot -->
-          <article class="project-nb-card">
+          <article class="project-nb-card" data-project-id="line-bot">
             <div class="card-top-bar bg-cyan">
               <span class="card-type-tag">AI &amp; AUTOMATION</span>
               <span class="card-year">2026</span>
@@ -110,7 +110,7 @@
                   <span>Source Code</span>
                   <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                 </a>
-                <button class="nb-btn-sm nb-btn-white demo-btn" data-project="LINE Receipt &amp; Expense Tracker Bot">
+                <button class="nb-btn-sm nb-btn-white demo-btn" data-project-id="line-bot" data-project="LINE Receipt &amp; Expense Tracker Bot">
                   <span>Overview</span>
                   <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                 </button>
@@ -119,7 +119,7 @@
           </article>
 
           <!-- Project 2: Secure RESTful API & Authentication Service -->
-          <article class="project-nb-card">
+          <article class="project-nb-card" data-project-id="rest-api">
             <div class="card-top-bar bg-yellow">
               <span class="card-type-tag">BACKEND &amp; SECURITY</span>
               <span class="card-year">2026</span>
@@ -144,7 +144,7 @@
                   <span>Source Code</span>
                   <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                 </a>
-                <button class="nb-btn-sm nb-btn-white demo-btn" data-project="Secure RESTful API &amp; Authentication Service">
+                <button class="nb-btn-sm nb-btn-white demo-btn" data-project-id="rest-api" data-project="Secure RESTful API &amp; Authentication Service">
                   <span>API Docs</span>
                   <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                 </button>
@@ -222,6 +222,46 @@
         <a href="#hero" class="footer-top-link">Back to Top ↑</a>
       </div>
     </footer>
+  </div>
+
+  <!-- Interactive Project Detail Modal Prototype -->
+  <div class="nb-modal-backdrop modal-overlay modal" id="projectModal" aria-hidden="true">
+    <div class="nb-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header-strip">
+        <div class="modal-header-left">
+          <span class="modal-category-tag" id="modalCategory">AI &amp; AUTOMATION</span>
+          <span class="modal-year-tag" id="modalYear">2026</span>
+        </div>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body-content">
+        <h3 class="modal-title" id="modalTitle">Project Title</h3>
+        <p class="modal-tagline" id="modalTagline">Project overview description</p>
+
+        <div class="modal-tags" id="modalTags"></div>
+
+        <!-- Architecture / Pipeline Box -->
+        <div class="modal-section-box">
+          <h4 class="modal-box-title">⚡ SYSTEM ARCHITECTURE &amp; DATA FLOW</h4>
+          <div class="arch-flow-diagram" id="modalArchFlow"></div>
+        </div>
+
+        <!-- Technical Highlights & Challenges -->
+        <div class="modal-section-box">
+          <h4 class="modal-box-title">🛠️ KEY ENGINEERING CHALLENGES &amp; IMPLEMENTATION</h4>
+          <ul class="modal-highlights-list" id="modalHighlights"></ul>
+        </div>
+
+        <div class="modal-actions-footer">
+          <a href="#" id="modalSourceBtn" target="_blank" rel="noopener noreferrer" class="nb-btn-sm nb-btn-primary">
+            <span>Source Code</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          </a>
+          <button class="nb-btn-sm nb-btn-white" id="modalSecondaryCloseBtn">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Toast Notification -->
