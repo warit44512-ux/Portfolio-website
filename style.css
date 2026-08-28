@@ -705,8 +705,8 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
-    padding: 12px 18px;
+    gap: 12px;
+    padding: 10px 14px;
   }
 
   .brand-chip {
@@ -718,19 +718,27 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    gap: 14px;
+    gap: 10px;
     margin-left: auto;
     flex-wrap: nowrap;
     white-space: nowrap;
   }
 
   .nb-nav-link {
-    font-size: 0.84rem;
+    font-size: 0.76rem;
+    letter-spacing: 0.02em;
     white-space: nowrap;
   }
 
   .header-status-badge {
     display: none;
+  }
+
+  /* Section Badges (e.g., 02 CASE STUDIES) */
+  .section-badge {
+    padding: 3px 8px;
+    font-size: 0.68rem;
+    white-space: nowrap;
   }
 
   /* 1) Container padding drops to 16px */
