@@ -54,6 +54,7 @@ html {
   line-height: 1.5;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 body {
@@ -61,6 +62,7 @@ body {
   display: flex;
   justify-content: center;
   padding: 28px 16px 80px;
+  overflow-x: hidden;
 }
 
 /* Page Container (Max-Width 1100px) */
@@ -937,6 +939,45 @@ body {
    Tablet & Mobile Optimization (@media (max-width: 768px))
    ========================================================================== */
 @media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+
+  body {
+    padding: 16px 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .page-container {
+    width: 100% !important;
+    max-width: calc(100vw - 32px) !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden;
+  }
+
+  /* Restrict Header and Card Boxes within screen */
+  .nb-header,
+  .hero-card,
+  .project-nb-card,
+  .tech-stack-card,
+  .contact-card,
+  .projects-callout-box,
+  .nb-footer,
+  .section-title-wrap {
+    width: 100% !important;
+    max-width: calc(100vw - 32px) !important;
+    box-sizing: border-box !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
   /* Header: Left-aligned logo, right-aligned single-line nav links, hidden status badge */
   .nb-header {
     position: relative;
@@ -946,11 +987,13 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
+    gap: 6px;
+    padding: 8px 10px;
+    margin-bottom: 24px;
   }
 
   .brand-chip {
+    font-size: 0.95rem;
     flex-shrink: 0;
     pointer-events: auto;
     touch-action: manipulation;
@@ -961,7 +1004,7 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    gap: 4px;
+    gap: 2px;
     margin-left: auto;
     flex-wrap: nowrap;
     white-space: nowrap;
@@ -971,9 +1014,9 @@ body {
   .nb-header nav a,
   .nb-nav-link {
     display: inline-block;
-    padding: 8px 10px;
-    font-size: 0.76rem;
-    letter-spacing: 0.02em;
+    padding: 6px 6px;
+    font-size: 0.68rem;
+    letter-spacing: 0.01em;
     white-space: nowrap;
     pointer-events: auto;
     touch-action: manipulation;
@@ -989,16 +1032,6 @@ body {
     padding: 3px 8px;
     font-size: 0.68rem;
     white-space: nowrap;
-  }
-
-  /* 1) Container padding drops to 16px */
-  body {
-    padding: 16px;
-  }
-
-  .page-container {
-    padding: 16px;
-    width: 100%;
   }
 
   /* 2) Projects grid stacks to 1 column */
