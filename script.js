@@ -59,21 +59,23 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // 2. Interactive Modal Elements & Handlers
-  const modal = document.getElementById('projectModal');
-  const modalCategory = document.getElementById('modalCategory');
-  const modalYear = document.getElementById('modalYear');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalTagline = document.getElementById('modalTagline');
-  const modalTags = document.getElementById('modalTags');
-  const modalArchFlow = document.getElementById('modalArchFlow');
-  const modalHighlights = document.getElementById('modalHighlights');
-  const modalSourceBtn = document.getElementById('modalSourceBtn');
-  const modalCloseBtn = document.getElementById('modalCloseBtn');
-  const modalSecondaryCloseBtn = document.getElementById('modalSecondaryCloseBtn');
+  function getModal() {
+    return document.getElementById('projectModal') || document.querySelector('.nb-modal-backdrop, .modal-overlay, .modal');
+  }
 
   function openProjectModal(projectId) {
     const data = projectDetails[projectId];
-    if (!data || !modal) return;
+    const modalElem = getModal();
+    if (!data || !modalElem) return;
+
+    const modalCategory = document.getElementById('modalCategory');
+    const modalYear = document.getElementById('modalYear');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalTagline = document.getElementById('modalTagline');
+    const modalTags = document.getElementById('modalTags');
+    const modalArchFlow = document.getElementById('modalArchFlow');
+    const modalHighlights = document.getElementById('modalHighlights');
+    const modalSourceBtn = document.getElementById('modalSourceBtn');
 
     // Populate data
     if (modalCategory) modalCategory.textContent = data.category;
@@ -111,90 +113,77 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Display modal
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
+    modalElem.classList.add('active');
+    modalElem.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
 
   function closeProjectModal() {
-    if (!modal) return;
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
+    const modalElem = getModal();
+    if (!modalElem) return;
+    modalElem.classList.remove('active');
+    modalElem.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
 
-  // Robust Click & Touch Handler with Debounce
-  let lastOpenTime = 0;
-  function handleOpenAction(btn, e) {
-    const now = Date.now();
-    if (now - lastOpenTime < 300) return;
-    lastOpenTime = now;
+  // 1) Clicking any project card toggles the active class on the corresponding modal
+  const projectCards = document.querySelectorAll('.project-nb-card');
+  projectCards.forEach((card) => {
+    card.addEventListener('click', (e) => {
+      // Don't intercept clicks on external links
+      if (e.target.closest('a')) return;
 
-    if (e && e.cancelable) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
-    const projectId = btn.getAttribute('data-project-id');
-    if (projectId && projectDetails[projectId]) {
-      openProjectModal(projectId);
-    } else {
-      const projName = btn.getAttribute('data-project') || 'Project';
-      showToast(`⚡ Viewing: ${projName}`);
-    }
-  }
-
-  let lastCloseTime = 0;
-  function handleCloseAction(e) {
-    const now = Date.now();
-    if (now - lastCloseTime < 300) return;
-    lastCloseTime = now;
-
-    if (e && e.cancelable) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    closeProjectModal();
-  }
-
-  // Attach demo/overview button listeners
-  const demoButtons = document.querySelectorAll('.demo-btn');
-  demoButtons.forEach((btn) => {
-    btn.addEventListener('click', (e) => handleOpenAction(btn, e));
-    btn.addEventListener('touchend', (e) => handleOpenAction(btn, e), { passive: false });
+      const projectId = card.getAttribute('data-project-id') ||
+                        card.querySelector('.demo-btn')?.getAttribute('data-project-id');
+      if (projectId && projectDetails[projectId]) {
+        const modalElem = getModal();
+        if (modalElem && modalElem.classList.contains('active')) {
+          closeProjectModal();
+        } else {
+          openProjectModal(projectId);
+        }
+      }
+    });
   });
 
-  // Modal close buttons
-  if (modalCloseBtn) {
-    modalCloseBtn.addEventListener('click', handleCloseAction);
-    modalCloseBtn.addEventListener('touchend', handleCloseAction, { passive: false });
-  }
-  if (modalSecondaryCloseBtn) {
-    modalSecondaryCloseBtn.addEventListener('click', handleCloseAction);
-    modalSecondaryCloseBtn.addEventListener('touchend', handleCloseAction, { passive: false });
-  }
-
-  // Close when clicking or tapping outside dialog backdrop
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) handleCloseAction(e);
+  // Demo buttons explicit click handler
+  const demoButtons = document.querySelectorAll('.demo-btn');
+  demoButtons.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const projectId = btn.getAttribute('data-project-id');
+      if (projectId && projectDetails[projectId]) {
+        openProjectModal(projectId);
+      }
     });
-    modal.addEventListener('touchend', (e) => {
-      if (e.target === modal) handleCloseAction(e);
-    }, { passive: false });
-  }
+  });
+
+  // 2) Clicking close buttons removes the active class
+  const closeButtons = document.querySelectorAll('.modal-close-btn, #modalCloseBtn, #modalSecondaryCloseBtn, .modal-close');
+  closeButtons.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeProjectModal();
+    });
+  });
+
+  // 3) Clicking background overlays removes the active class
+  const modalOverlays = document.querySelectorAll('.nb-modal-backdrop, .modal-overlay, .modal');
+  modalOverlays.forEach((overlay) => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeProjectModal();
+      }
+    });
+  });
 
   // Close with Escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+    const modalElem = getModal();
+    if (e.key === 'Escape' && modalElem && modalElem.classList.contains('active')) {
       closeProjectModal();
     }
-  });
-
-  // Global delegation fallback for dynamic tap safety
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.demo-btn');
-    if (btn) handleOpenAction(btn, e);
   });
 
   // 3. One-Click Copy Email to Clipboard

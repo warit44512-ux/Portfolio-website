@@ -668,25 +668,30 @@ body {
 /* ==========================================================================
    Interactive Project Detail Modal
    ========================================================================== */
+.modal,
+.modal-overlay,
 .nb-modal-backdrop {
+  display: none;
+  pointer-events: none;
   position: fixed;
   inset: 0;
   z-index: 9999;
   background: rgba(2, 6, 23, 0.85);
   backdrop-filter: blur(6px);
-  display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
   opacity: 0;
-  pointer-events: none;
   transition: opacity 0.2s ease;
 }
 
+.modal.active,
+.modal-overlay.active,
 .nb-modal-backdrop.active {
+  display: flex !important;
+  pointer-events: auto !important;
+  z-index: 9999 !important;
   opacity: 1;
-  pointer-events: auto;
-  z-index: 9999;
 }
 
 .nb-modal-dialog {
@@ -707,6 +712,8 @@ body {
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.modal.active .nb-modal-dialog,
+.modal-overlay.active .nb-modal-dialog,
 .nb-modal-backdrop.active .nb-modal-dialog {
   transform: translateY(0) scale(1);
 }
@@ -1000,6 +1007,8 @@ body {
   }
 
   /* Modal Mobile Adjustments */
+  .modal,
+  .modal-overlay,
   .nb-modal-backdrop {
     padding: 12px;
   }
