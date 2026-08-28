@@ -1040,44 +1040,59 @@ body {
   }
 
   /* Contact Section Mobile Adjustments */
+  #contact,
+  .contact-card,
+  .contact-header-strip,
+  .contact-strip-title,
+  .contact-content,
+  .contact-title,
+  .contact-text,
+  .contact-action-bar,
+  .contact-action-bar .nb-btn,
+  .contact-action-bar a,
+  .contact-action-bar button,
+  .contact-action-bar span {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
   .contact-card {
     width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 4px;
   }
 
   .contact-header-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 8px 12px;
     font-size: 0.75rem;
-    flex-wrap: wrap;
     gap: 6px;
   }
 
   .contact-content {
     padding: 18px 14px;
-    max-width: 100%;
-    box-sizing: border-box;
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
-
-  .contact-title,
-  .contact-text,
-  .contact-strip-title {
-    max-width: 100%;
-    overflow-wrap: break-word;
-    word-break: break-word;
+    width: 100%;
   }
 
   .contact-title {
     font-size: 1.18rem;
+    line-height: 1.25;
+    margin-bottom: 8px;
   }
 
   .contact-text {
     font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
   }
 
   .contact-action-bar {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     width: 100%;
@@ -1086,21 +1101,15 @@ body {
 
   .contact-action-bar .nb-btn {
     width: 100%;
-    max-width: 100%;
     padding: 10px 12px;
     font-size: 0.85rem;
-    overflow-wrap: break-word;
-    word-break: break-word;
     justify-content: center;
-    box-sizing: border-box;
+    text-align: center;
   }
 
-  .contact-action-bar a,
-  .contact-action-bar button,
-  .contact-action-bar span {
-    max-width: 100%;
-    overflow-wrap: break-word;
-    word-break: break-word;
+  .contact-action-bar .nb-btn span {
+    display: inline-block;
+    text-align: center;
   }
 
   /* Modal Mobile Adjustments */
