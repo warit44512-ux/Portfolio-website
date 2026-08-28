@@ -667,21 +667,6 @@ body {
     padding: 12px 10px 60px;
   }
 
-  .nb-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .nb-nav {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .header-status-badge {
-    margin-left: 0;
-  }
-
   .hero-card {
     padding: 32px 18px;
   }
@@ -714,6 +699,40 @@ body {
    Tablet & Mobile Optimization (@media (max-width: 768px))
    ========================================================================== */
 @media (max-width: 768px) {
+  /* Header: Left-aligned logo, right-aligned single-line nav links, hidden status badge */
+  .nb-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 18px;
+  }
+
+  .brand-chip {
+    flex-shrink: 0;
+  }
+
+  .nb-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+    margin-left: auto;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+
+  .nb-nav-link {
+    font-size: 0.84rem;
+    white-space: nowrap;
+  }
+
+  .header-status-badge {
+    display: none;
+  }
+
   /* 1) Container padding drops to 16px */
   body {
     padding: 16px;
