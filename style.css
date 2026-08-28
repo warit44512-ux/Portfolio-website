@@ -918,16 +918,21 @@ body {
 @media (max-width: 768px) {
   /* Header: Left-aligned logo, right-aligned single-line nav links, hidden status badge */
   .nb-header {
+    position: relative;
+    z-index: 1000;
+    pointer-events: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     padding: 10px 14px;
   }
 
   .brand-chip {
     flex-shrink: 0;
+    pointer-events: auto;
+    touch-action: manipulation;
   }
 
   .nb-nav {
@@ -935,16 +940,23 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 4px;
     margin-left: auto;
     flex-wrap: nowrap;
     white-space: nowrap;
+    pointer-events: auto;
   }
 
+  .nb-header nav a,
   .nb-nav-link {
+    display: inline-block;
+    padding: 8px 10px;
     font-size: 0.76rem;
     letter-spacing: 0.02em;
     white-space: nowrap;
+    pointer-events: auto;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .header-status-badge {
