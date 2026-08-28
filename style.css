@@ -773,23 +773,34 @@ body {
   border-radius: 3px;
 }
 
+.modal-close,
+.close-btn,
 .modal-close-btn {
+  position: relative;
+  z-index: 10001 !important;
+  pointer-events: auto !important;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   font-size: 1.6rem;
   line-height: 1;
   color: var(--text-dark);
   cursor: pointer;
-  pointer-events: auto;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   font-weight: 900;
-  padding: 0 4px;
+  padding: 0;
   transition: transform 0.1s ease;
 }
 
+.modal-close:hover,
+.close-btn:hover,
 .modal-close-btn:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
 .modal-body-content {

@@ -158,14 +158,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 2) Clicking close buttons removes the active class
-  const closeButtons = document.querySelectorAll('.modal-close-btn, #modalCloseBtn, #modalSecondaryCloseBtn, .modal-close');
-  closeButtons.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
+  // 2) Clicking close buttons cleanly removes the active class with stopPropagation
+  function handleModalCloseEvent(e) {
+    if (e) {
+      if (e.cancelable) e.preventDefault();
       e.stopPropagation();
-      closeProjectModal();
-    });
+      e.stopImmediatePropagation();
+    }
+    closeProjectModal();
+  }
+
+  const closeButtons = document.querySelectorAll('.modal-close, .close-btn, .modal-close-btn, #modalCloseBtn, #modalSecondaryCloseBtn');
+  closeButtons.forEach((btn) => {
+    btn.addEventListener('click', handleModalCloseEvent);
+    btn.addEventListener('touchend', handleModalCloseEvent, { passive: false });
   });
 
   // 3) Clicking background overlays removes the active class
@@ -173,16 +179,28 @@ document.addEventListener('DOMContentLoaded', () => {
   modalOverlays.forEach((overlay) => {
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) {
-        closeProjectModal();
+        handleModalCloseEvent(e);
       }
     });
+    overlay.addEventListener('touchend', (e) => {
+      if (e.target === overlay) {
+        handleModalCloseEvent(e);
+      }
+    }, { passive: false });
+  });
+
+  // Global delegation fallback for close triggers
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.modal-close, .close-btn, .modal-close-btn, #modalCloseBtn, #modalSecondaryCloseBtn')) {
+      handleModalCloseEvent(e);
+    }
   });
 
   // Close with Escape key
   document.addEventListener('keydown', (e) => {
     const modalElem = getModal();
     if (e.key === 'Escape' && modalElem && modalElem.classList.contains('active')) {
-      closeProjectModal();
+      handleModalCloseEvent(e);
     }
   });
 
