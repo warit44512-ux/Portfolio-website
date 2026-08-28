@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warit Saritdichainanta — Computer Engineering Portfolio</title>
+  <meta name="description" content="Portfolio of Warit Saritdichainanta — Computer Engineering student @ SIIT, Thammasat building desktop software, web applications, and practical engineering solutions." />
+
+  <!-- Google Fonts: Space Grotesk, Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="page-container">
+    <!-- Top Navigation Bar -->
+    <header class="nb-header">
+      <a href="#" class="brand-chip" aria-label="Warit Home">
+        <span class="brand-code">&lt;WARIT/&gt;</span>
+      </a>
+
+      <nav class="nb-nav" aria-label="Main Navigation">
+        <a href="#projects" class="nb-nav-link">PROJECTS</a>
+        <a href="#stack" class="nb-nav-link">TECH STACK</a>
+        <a href="#contact" class="nb-nav-link">CONTACT</a>
+      </nav>
+
+      <div class="header-status-badge">
+        <span class="status-indicator"></span>
+        <span>OPEN FOR ROLES</span>
+      </div>
+    </header>
+
+    <main>
+      <!-- 1. Single-Column Centered Hero Section -->
+      <section class="nb-hero" id="hero">
+        <div class="hero-card">
+          <div class="hero-tag-wrap">
+            <span class="sticker sticker-yellow">🎓 CPE @ SIIT Thammasat</span>
+          </div>
+
+          <h1 class="hero-name-bold">WARIT SARITDICHAINANTA</h1>
+
+          <p class="hero-bio-crisp">
+            Computer Engineering student @ SIIT Thammasat. Building practical desktop tools, web apps, and software solutions.
+          </p>
+
+          <div class="hero-actions-row">
+            <a href="#projects" class="nb-btn nb-btn-primary">
+              <span>View Projects</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
+            </a>
+
+            <a href="https://github.com/warit44512-ux" target="_blank" rel="noopener noreferrer" class="nb-btn nb-btn-white">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+              <span>GitHub</span>
+            </a>
+
+            <a href="https://www.linkedin.com/in/warit-saritdichainanta-3aa4ab392/" target="_blank" rel="noopener noreferrer" class="nb-btn nb-btn-white">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Featured Projects Section -->
+      <section class="nb-section" id="projects">
+        <div class="section-title-wrap">
+          <h2 class="section-heading">FEATURED PROJECTS</h2>
+          <span class="section-badge sticker-yellow">02 CASE STUDIES</span>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1: LINE Receipt & Expense Tracker Bot -->
+          <article class="project-nb-card">
+            <div class="card-top-bar bg-cyan">
+              <span class="card-type-tag">AI &amp; AUTOMATION</span>
+              <span class="card-year">2026</span>
+            </div>
+            <div class="card-main">
+              <h3 class="project-title">LINE Receipt &amp; Expense Tracker Bot</h3>
+              
+              <div class="project-tags">
+                <span class="nb-tag tag-cyan">Node.js</span>
+                <span class="nb-tag tag-yellow">LINE API</span>
+                <span class="nb-tag tag-pink">Claude / Gemini</span>
+                <span class="nb-tag tag-mint">Google Sheets API</span>
+              </div>
+
+              <ul class="project-bullets">
+                <li>Created a personal finance assistant in LINE to eliminate manual expense tracking using smart image recognition for receipts and Thai banking slips.</li>
+                <li>Connected LINE webhooks directly to Google Sheets for structured financial logging, custom text commands, and weekly AI summaries.</li>
+              </ul>
+
+              <div class="project-actions">
+                <a href="https://github.com/warit44512-ux/receipt-bot" target="_blank" rel="noopener noreferrer" class="nb-btn-sm nb-btn-primary">
+                  <span>Source Code</span>
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <button class="nb-btn-sm nb-btn-white demo-btn" data-project="LINE Receipt &amp; Expense Tracker Bot">
+                  <span>Overview</span>
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: Secure RESTful API & Authentication Service -->
+          <article class="project-nb-card">
+            <div class="card-top-bar bg-yellow">
+              <span class="card-type-tag">BACKEND &amp; SECURITY</span>
+              <span class="card-year">2026</span>
+            </div>
+            <div class="card-main">
+              <h3 class="project-title">Secure RESTful API &amp; Authentication Service</h3>
+              
+              <div class="project-tags">
+                <span class="nb-tag tag-cyan">Node.js</span>
+                <span class="nb-tag tag-yellow">Express</span>
+                <span class="nb-tag tag-pink">JWT</span>
+                <span class="nb-tag tag-mint">SQL / SQLite</span>
+              </div>
+
+              <ul class="project-bullets">
+                <li>Engineered a modular REST API featuring secure JWT-based user authentication, role-based access control (RBAC), and bcrypt password hashing.</li>
+                <li>Implemented structured CRUD endpoints, request payload validation, and SQL database persistence with automated API documentation.</li>
+              </ul>
+
+              <div class="project-actions">
+                <a href="https://github.com/warit44512-ux" target="_blank" rel="noopener noreferrer" class="nb-btn-sm nb-btn-primary">
+                  <span>Source Code</span>
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <button class="nb-btn-sm nb-btn-white demo-btn" data-project="Secure RESTful API &amp; Authentication Service">
+                  <span>API Docs</span>
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. Technical Stack Section -->
+      <section class="nb-section" id="stack">
+        <div class="section-title-wrap">
+          <h2 class="section-heading">TECHNICAL STACK</h2>
+          <span class="section-badge sticker-cyan">CORE TOOLS</span>
+        </div>
+
+        <div class="tech-stack-card">
+          <div class="tech-stack-badges-wrap">
+            <span class="stack-badge">Java</span>
+            <span class="stack-badge">Python</span>
+            <span class="stack-badge">Node.js</span>
+            <span class="stack-badge">JavaScript</span>
+            <span class="stack-badge">OOP</span>
+            <span class="stack-badge">REST APIs</span>
+            <span class="stack-badge">Event-Driven</span>
+            <span class="stack-badge">HTML / CSS</span>
+            <span class="stack-badge">Git</span>
+            <span class="stack-badge">Render</span>
+            <span class="stack-badge">Netlify</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Contact Section -->
+      <section class="nb-section" id="contact">
+        <div class="section-title-wrap">
+          <h2 class="section-heading">CONTACT</h2>
+          <span class="section-badge sticker-yellow">LET'S TALK</span>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-header-strip">
+            <span class="contact-strip-title">LET'S CONNECT &amp; COLLABORATE</span>
+            <span class="badge-icon">📬</span>
+          </div>
+
+          <div class="contact-content">
+            <h2 class="contact-title">GET IN TOUCH</h2>
+            <p class="contact-text">
+              Currently open for Computer Engineering internship roles.
+            </p>
+
+            <div class="contact-action-bar">
+              <a href="mailto:warit.dev@gmail.com" class="nb-btn nb-btn-primary">
+                <span>warit.dev@gmail.com</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+
+              <button class="nb-btn nb-btn-white" id="copyEmailBtn">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span id="copyLabel">Copy Email</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Neo-Brutalist Footer -->
+    <footer class="nb-footer">
+      <div class="footer-left">
+        <strong>WARIT SARITDICHAINANTA</strong> • CPE @ SIIT Thammasat University
+      </div>
+      <div class="footer-right">
+        <a href="#hero" class="footer-top-link">Back to Top ↑</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="nb-toast" id="toast">
+    <span class="toast-icon">⚡</span>
+    <span id="toastMsg">Email copied to clipboard!</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
