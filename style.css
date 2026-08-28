@@ -694,11 +694,11 @@ body {
 .modal,
 .modal-overlay,
 .nb-modal-backdrop {
-  display: none;
-  pointer-events: none;
+  display: none !important;
+  pointer-events: none !important;
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 99999;
   background: rgba(2, 6, 23, 0.85);
   backdrop-filter: blur(6px);
   align-items: center;
@@ -713,13 +713,13 @@ body {
 .nb-modal-backdrop.active {
   display: flex !important;
   pointer-events: auto !important;
-  z-index: 9999 !important;
+  z-index: 99999 !important;
   opacity: 1;
 }
 
 .nb-modal-dialog {
   position: relative;
-  z-index: 10000;
+  z-index: 100000;
   pointer-events: auto;
   background: var(--bg-card);
   border: 2px solid var(--border-cyan);

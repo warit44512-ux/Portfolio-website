@@ -119,10 +119,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeProjectModal() {
-    const modalElem = getModal();
-    if (!modalElem) return;
-    modalElem.classList.remove('active');
-    modalElem.setAttribute('aria-hidden', 'true');
+    closeAllModals();
+  }
+
+  function closeAllModals() {
+    const allModals = document.querySelectorAll('.modal, .modal-overlay, .nb-modal-backdrop');
+    allModals.forEach((m) => {
+      m.classList.remove('active');
+      m.setAttribute('aria-hidden', 'true');
+    });
     document.body.style.overflow = '';
   }
 
@@ -138,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (projectId && projectDetails[projectId]) {
         const modalElem = getModal();
         if (modalElem && modalElem.classList.contains('active')) {
-          closeProjectModal();
+          closeAllModals();
         } else {
           openProjectModal(projectId);
         }
@@ -158,49 +163,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 2) Clicking close buttons cleanly removes the active class with stopPropagation
-  function handleModalCloseEvent(e) {
-    if (e) {
+  // Global click & touch delegation listener for closing active modals
+  function handleGlobalModalClose(e) {
+    const isCloseBtn = e.target.closest('.modal-close, .close-btn, .modal-close-btn, #modalCloseBtn, #modalSecondaryCloseBtn, [data-modal-close]');
+    const isBackdrop = e.target.matches('.modal, .modal-overlay, .nb-modal-backdrop');
+
+    if (isCloseBtn || isBackdrop) {
       if (e.cancelable) e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
+      closeAllModals();
     }
-    closeProjectModal();
   }
 
-  const closeButtons = document.querySelectorAll('.modal-close, .close-btn, .modal-close-btn, #modalCloseBtn, #modalSecondaryCloseBtn');
-  closeButtons.forEach((btn) => {
-    btn.addEventListener('click', handleModalCloseEvent);
-    btn.addEventListener('touchend', handleModalCloseEvent, { passive: false });
-  });
-
-  // 3) Clicking background overlays removes the active class
-  const modalOverlays = document.querySelectorAll('.nb-modal-backdrop, .modal-overlay, .modal');
-  modalOverlays.forEach((overlay) => {
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        handleModalCloseEvent(e);
-      }
-    });
-    overlay.addEventListener('touchend', (e) => {
-      if (e.target === overlay) {
-        handleModalCloseEvent(e);
-      }
-    }, { passive: false });
-  });
-
-  // Global delegation fallback for close triggers
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('.modal-close, .close-btn, .modal-close-btn, #modalCloseBtn, #modalSecondaryCloseBtn')) {
-      handleModalCloseEvent(e);
-    }
-  });
+  document.addEventListener('click', handleGlobalModalClose, true);
+  document.addEventListener('touchend', handleGlobalModalClose, { capture: true, passive: false });
 
   // Close with Escape key
   document.addEventListener('keydown', (e) => {
-    const modalElem = getModal();
-    if (e.key === 'Escape' && modalElem && modalElem.classList.contains('active')) {
-      handleModalCloseEvent(e);
+    if (e.key === 'Escape') {
+      closeAllModals();
     }
   });
 
